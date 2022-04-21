@@ -18,16 +18,20 @@ jobs:
           VALIDATE_PYTHON: true
 
   build:
-    needs: [lint]
     runs-on: ubuntu-latest
+    needs: [ lint ]
+  # strategy:
+  # matrix:
+  # python-version: ["3.8", "3.9", "3.10"]
 
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Python ${{ matrix.python-version }}
+      - name: 'Resolve Project Dependencies Using Pip'
+      shell: bash
         uses: actions/setup-python@v3
-        with:
-          python-version: 3.9
+        #with:
+          #python-version: 3.9
           
       - name: Install dependencies
         run: |
